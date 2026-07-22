@@ -1,0 +1,226 @@
+/* Registration Simulator — sim-specific styles.
+   Layered ON TOP of foundation/kl-unl.css; the foundation files are unmodified. */
+
+/* Larger, zoomable base text for sim content (WCAG 1.4.4) */
+.rs-shell {
+  font-size: 1.125rem;
+  padding-bottom: 1rem;
+}
+
+.rs-shell .panel__heading {
+  font-size: 1.25rem;
+}
+
+/* Two-column layout: work area (flexible) left, controls right — mirrors the
+   original Flash layout. Collapses to one column at the foundation breakpoint. */
+.rs-layout {
+  grid-template-columns: minmax(0, 1fr) 24rem;
+  gap: 1rem;
+  padding-top: 0.5rem;
+  align-items: stretch;   /* both columns share one row height... */
+}
+
+.rs-right {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* ...and the Starfield Controls panel absorbs any leftover height, so the
+   Appearance Options panel bottom lines up with the Work Area panel bottom. */
+.rs-right > .panel:first-child {
+  flex: 1 1 auto;
+}
+
+.rs-right > .panel:last-child {
+  flex: 0 0 auto;
+}
+
+/* ------------------------------------------------------------------ */
+/* Work area stage: canvas keeps its original 500x400 stage coordinate */
+/* system and is scaled by CSS with preserved aspect ratio.            */
+/* ------------------------------------------------------------------ */
+.rs-work-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Center the stage in any leftover panel height (the canvas keeps its own
+   aspect ratio while the row height is shared with the controls column). */
+.rs-work-panel .panel__canvas-wrap {
+  padding: 0 1rem 1rem;
+  margin: auto 0;
+}
+
+.rs-stage {
+  position: relative;
+  touch-action: none;          /* dragging must not scroll/zoom the page */
+  line-height: 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#rs-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 0;
+}
+
+/* Invisible focusable proxies overlaying each star field on the canvas.
+   Positioned/sized in percent by simulation.js so they track the CSS scale. */
+.rs-field-proxy {
+  position: absolute;
+  background: transparent;
+  cursor: move;
+  box-sizing: border-box;
+}
+
+.rs-field-proxy--fixed {
+  cursor: pointer;
+}
+
+/* Always-visible ring while a field proxy holds focus (keyboard drag mode) */
+.rs-field-proxy:focus {
+  outline-width: 0.1875rem;
+  outline-style: solid;
+  outline-color: var(--outline-color, #005fcc);
+  outline-offset: 0.125rem;
+}
+
+/* ------------------------------------------------------------------ */
+/* Starfield Controls table                                            */
+/* ------------------------------------------------------------------ */
+.rs-grid {
+  border-collapse: collapse;
+  margin: 0.5rem auto 0.25rem;
+  max-width: 100%;
+  font-size: 1rem;
+}
+
+.rs-grid th,
+.rs-grid td {
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0.4rem 0.45rem;
+}
+
+.rs-grid thead th {
+  white-space: nowrap;    /* keep "on top" / "x offset" headers on one line */
+  padding-bottom: 0.5rem;
+}
+
+/* Thin vertical rules between columns, like the original layout */
+.rs-grid td + td,
+.rs-grid td + th,
+.rs-grid th + td,
+.rs-grid tr > * + * {
+  border-left: 1px solid var(--border-color, #767676);
+}
+
+.rs-grid tbody th[scope="row"] {
+  text-align: right;
+  white-space: nowrap;
+  padding-right: 0.75rem;
+}
+
+.rs-grid input[type="checkbox"],
+.rs-grid input[type="radio"] {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin: 0;
+  display: block;
+  margin-inline: auto;
+  cursor: pointer;
+}
+
+.rs-grid input[type="radio"]:disabled {
+  cursor: default;
+}
+
+/* Equal-purpose offset inputs share one size; digits right-aligned so they line up */
+.rs-offset-input {
+  width: 3.25rem;
+  min-height: 1.75rem;
+  box-sizing: border-box;
+  font-size: 1rem;
+  text-align: right;
+  padding: 0.2rem 0.35rem;
+  color: var(--foreground-color, #1a1a1a);
+  background: var(--background-color, #ffffff);
+  border-width: var(--border-width, 1px);
+  border-style: var(--border-style, solid);
+  border-color: var(--border-color, #767676);
+}
+
+.rs-dashes {
+  color: var(--border-color, #767676);
+  letter-spacing: 0.15em;
+}
+
+/* Italic helper text, as in the original */
+.rs-hint {
+  font-style: italic;
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  margin: 0.5rem 1.25rem;
+}
+
+.rs-hint--tight {
+  margin: 0;
+}
+
+.rs-switch-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 1rem 0.9rem;
+}
+
+/* ------------------------------------------------------------------ */
+/* Appearance Options                                                  */
+/* ------------------------------------------------------------------ */
+.rs-choice-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  width: max-content;
+  margin: 0.25rem auto 0;
+  padding: 0 1rem 0.9rem;
+}
+
+.rs-choice-stack .control-choice {
+  min-height: 2.75rem;   /* comfortable touch target */
+}
+
+/* ------------------------------------------------------------------ */
+/* Responsive: single column below the foundation's 56rem breakpoint   */
+/* (keeps the kl-unl.css collapse intact; this just un-does the sim's  */
+/* desktop column template at the same width).                         */
+/* ------------------------------------------------------------------ */
+@media (max-width: 56rem) {
+  .rs-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .rs-grid {
+    width: 100%;
+    max-width: 26rem;
+  }
+}
+
+@media (max-width: 30rem) {
+  .rs-grid th,
+  .rs-grid td {
+    padding: 0.45rem 0.3rem;
+  }
+
+  .rs-offset-input {
+    width: 3rem;
+  }
+}

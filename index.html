@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Registration Simulator</title>
+  <link href="foundation/kl-unl.css" type="text/css" rel="stylesheet" media="all">
+  <link href="styles/styles.css" type="text/css" rel="stylesheet" media="all">
+  <script src="foundation/kl-unl-masthead.js" defer></script>
+  <script src="foundation/kl-unl.js" defer></script>
+  <script src="simulation.js" defer></script>
+</head>
+<body>
+  <div class="app-shell rs-shell">
+    <kl-unl-masthead sim-id="registrationSimulator" json-url="foundation/contents.json"></kl-unl-masthead>
+
+    <main class="app-layout rs-layout">
+
+      <!-- Work Area panel (the star field images) -->
+      <section class="panel rs-work-panel" aria-labelledby="rs-work-heading">
+        <h2 class="panel__heading" id="rs-work-heading">Work Area</h2>
+        <div class="panel__canvas-wrap">
+          <div class="rs-stage" id="rs-stage">
+            <canvas id="rs-canvas" width="500" height="400" aria-hidden="true"></canvas>
+            <div class="rs-field-proxy rs-field-proxy--fixed" id="rs-proxy-1" tabindex="0"
+                 role="button" aria-describedby="rs-desc"></div>
+            <div class="rs-field-proxy" id="rs-proxy-2" tabindex="0" role="application"
+                 aria-roledescription="draggable star field image" aria-describedby="rs-desc"></div>
+            <div class="rs-field-proxy" id="rs-proxy-3" tabindex="0" role="application"
+                 aria-roledescription="draggable star field image" aria-describedby="rs-desc"></div>
+          </div>
+          <p class="sr-only" id="rs-desc"></p>
+        </div>
+      </section>
+
+      <div class="rs-right">
+
+        <!-- Starfield Controls panel -->
+        <section class="panel" aria-labelledby="rs-controls-heading">
+          <h2 class="panel__heading" id="rs-controls-heading">Starfield Controls</h2>
+          <table class="rs-grid">
+            <thead>
+              <tr>
+                <td></td>
+                <th scope="col">shown</th>
+                <th scope="col">on top</th>
+                <th scope="col">x offset</th>
+                <th scope="col">y offset</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">starfield&nbsp;1</th>
+                <td><input type="checkbox" id="rs-show-1" checked aria-label="show starfield 1"></td>
+                <td><input type="radio" name="rs-ontop" id="rs-ontop-1" value="1" checked
+                           aria-label="put starfield 1 on top"></td>
+                <td><span class="rs-dashes" aria-hidden="true">----</span><span class="sr-only">starfield 1 is fixed</span></td>
+                <td><span class="rs-dashes" aria-hidden="true">----</span><span class="sr-only">starfield 1 is fixed</span></td>
+              </tr>
+              <tr>
+                <th scope="row">starfield&nbsp;2</th>
+                <td><input type="checkbox" id="rs-show-2" aria-label="show starfield 2"></td>
+                <td><input type="radio" name="rs-ontop" id="rs-ontop-2" value="2" disabled
+                           aria-label="put starfield 2 on top"></td>
+                <td><input type="text" class="rs-offset-input" id="rs-x-2" maxlength="3" value="0"
+                           inputmode="numeric" autocomplete="off"
+                           aria-label="starfield 2 x offset in pixels"></td>
+                <td><input type="text" class="rs-offset-input" id="rs-y-2" maxlength="3" value="0"
+                           inputmode="numeric" autocomplete="off"
+                           aria-label="starfield 2 y offset in pixels"></td>
+              </tr>
+              <tr>
+                <th scope="row">starfield&nbsp;3</th>
+                <td><input type="checkbox" id="rs-show-3" aria-label="show starfield 3"></td>
+                <td><input type="radio" name="rs-ontop" id="rs-ontop-3" value="3" disabled
+                           aria-label="put starfield 3 on top"></td>
+                <td><input type="text" class="rs-offset-input" id="rs-x-3" maxlength="3" value="0"
+                           inputmode="numeric" autocomplete="off"
+                           aria-label="starfield 3 x offset in pixels"></td>
+                <td><input type="text" class="rs-offset-input" id="rs-y-3" maxlength="3" value="0"
+                           inputmode="numeric" autocomplete="off"
+                           aria-label="starfield 3 y offset in pixels"></td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="rs-hint panel__help">you can use the arrow keys to adjust the position of the on top star field (star field 1 is fixed)</p>
+          <div class="rs-switch-row">
+            <button type="button" class="button" id="rs-advance">switch on top field</button>
+            <p class="rs-hint rs-hint--tight">or press 'a'</p>
+          </div>
+        </section>
+
+        <!-- Appearance Options panel -->
+        <section class="panel" aria-labelledby="rs-appearance-heading">
+          <h2 class="panel__heading" id="rs-appearance-heading">Appearance Options</h2>
+          <div class="rs-choice-stack">
+            <div class="control-choice">
+              <input type="checkbox" id="rs-alpha">
+              <label for="rs-alpha">make top field transparent</label>
+            </div>
+            <div class="control-choice">
+              <input type="checkbox" id="rs-invert">
+              <label for="rs-invert">invert colors</label>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <div class="sr-only" aria-live="polite" id="rs-live"></div>
+  </div>
+</body>
+</html>
