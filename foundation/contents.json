@@ -1183,7 +1183,7 @@
     "masthead": {
       "help": {
         "title": "Help and Instructions",
-        "content": "<p>This simulator allows one to adjust the relative positions of three images so that their contents are aligned.</p>"
+        "content": "<p>This simulator allows one to adjust the relative positions of three images so that their contents are aligned.</p><p>Use the <em>Starfield Controls</em> panel to show each star field and to choose which one is on top. Only the field that is on top can be moved; star field 1 is fixed and serves as the reference.</p><p>Move the top field around with the mouse or the keyboard:</p><ul><li><strong>Mouse or touch:</strong> click (or tap) a star field and drag it. Clicking a field also brings it on top.</li><li><strong>Keyboard:</strong> press Tab to move the focus onto a star field, or simply click it, and then use the arrow keys to move it one pixel at a time. Hold Shift with an arrow key, or use Page Up and Page Down, to move ten pixels at a time.</li><li>You can also type the x and y offsets directly into the text boxes, or press the <em>switch on top field</em> button (or the 'a' key) to change which field is on top.</li></ul><p>The images are registered when the stars of the different fields line up exactly on top of one another.</p>"
       },
       "about": {
         "title": "About this Simulator",
