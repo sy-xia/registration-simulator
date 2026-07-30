@@ -1,0 +1,5 @@
+you can use the arrow keys to adjust 
+--- RECORDSEPARATOR ---
+the position of the on top star field 
+--- RECORDSEPARATOR ---
+(star field 1 is fixed)
